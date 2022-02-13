@@ -1,6 +1,6 @@
 extern crate permutation_way;
 
-use actix_web::{post, web, App, HttpServer, Responder, Result, middleware};
+use actix_web::{post, web, App, HttpServer, Responder, Result, middleware, HttpResponse, get};
 use permutation_way::PermutationIterator;
 use serde::{Deserialize, Serialize};
 
@@ -12,6 +12,19 @@ struct PermutationResponse {
 struct PermutationRequest {
     input: Vec<i32>,
     max: Option<u32>
+}
+
+
+#[get("/")]
+async fn index() -> impl Responder {
+
+    let usage = r#"
+    usage : <code>curl -i -X POST host:port  -d '{"input": [1, 2, 3, 4, 5, 6]}' -H 'Content-Type: application/json'</code>
+    "#;
+
+    HttpResponse::Ok()
+        .content_type("text/html")
+        .body(usage)
 }
 
 #[post("/")]
@@ -48,6 +61,7 @@ async fn main() -> std::io::Result<()> {
             App::new()
             .wrap(middleware::Logger::default())
             .service(permut)
+            .service(index)
         )
         .bind("0.0.0.0:8080")?
         .run();
