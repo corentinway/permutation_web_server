@@ -41,7 +41,7 @@ jobs:
         # List of build-time variables
         build-args: -t corentinway/permutation_web_server
         # List of tags
-        tags: no-prod
+        tags: corentinway/permutation_web_server
         context: /home/runner/work/permutation_web_server/permutation_web_server/
         push: true
         
