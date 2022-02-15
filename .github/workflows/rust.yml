@@ -42,4 +42,5 @@ jobs:
         build-args: -t corentinway/permutation_web_server
         # List of tags
         tags: no-prod
+        context: /home/runner/work/permutation_web_server/permutation_web_server/
         
